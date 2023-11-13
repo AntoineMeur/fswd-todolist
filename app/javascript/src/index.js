@@ -22,42 +22,42 @@ function updateTasksList() {
   });
 }
 
-updateTasksList();
-
-
-$("#addTaskBtn").on("click", function () {
-  console.log("Button clicked");
-  var newTaskContent = $("#newTask").val();
-
-  if (newTaskContent.trim() !== "") {
-    postTask(newTaskContent, function () {
-      updateTasksList();
-      $("#newTask").val("");
-    });
-  }
-});
-
-$("task").on("click", ".task", function (){
-  var taskId = $(this).data("id");
-  deleteTask(taskId,function(){
-    updateTasksList();
-  } )
-});
-
-
-$("#tasks").on("change", ".task-checkbox", function () {
+// Use $(document).ready() to execute code when DOM is ready
+$(document).ready(function () {
+  updateTasksList();
   
-  var taskId = $(this).closest('.task').data("id");
-
-  var isCompleted = $(this).prop("checked");
-
-  if (isCompleted) {
-    markTaskComplete(taskId, function () {
+  $("#addTaskBtn").on("click", function () {
+    console.log("Button clicked");
+    var newTaskContent = $("#newTask").val();
+  
+    if (newTaskContent.trim() !== "") {
+      postTask(newTaskContent, function () {
+        updateTasksList();
+        $("#newTask").val("");
+      });
+    }
+  });
+  
+  $("task").on("click", ".task", function (){
+    var taskId = $(this).data("id");
+    deleteTask(taskId,function(){
       updateTasksList();
-    });
-  } else {
-    markTaskActive(taskId, function () {
-      updateTasksList();
-    });
-  }
+    } )
+  });
+  
+  $("#tasks").on("change", ".task-checkbox", function () {
+    var taskId = $(this).closest('.task').data("id");
+  
+    var isCompleted = $(this).prop("checked");
+  
+    if (isCompleted) {
+      markTaskComplete(taskId, function () {
+        updateTasksList();
+      });
+    } else {
+      markTaskActive(taskId, function () {
+        updateTasksList();
+      });
+    }
+  });
 });
