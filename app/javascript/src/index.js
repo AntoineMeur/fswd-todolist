@@ -4,6 +4,8 @@ import {
   indexTasks,
   postTask,
   deleteTask,
+  markTaskComplete,
+  markTaskActive
 } from "./requests.js";
 
 function updateTasksList() {
@@ -38,14 +40,23 @@ $(document).ready(function () {
     }
   });
   
+<<<<<<< HEAD
   $(document).on("click", ".delete-btn", function (){
     var taskId = $(this).closest('.task').data("id");
+=======
+  $("task").on("click", ".task", function (){
+    var taskId = $(this).data("id");
+>>>>>>> refs/remotes/origin/main
     deleteTask(taskId,function(){
       updateTasksList();
     } )
   });
   
+<<<<<<< HEAD
   $(document).on("change", ".task-checkbox", function () {
+=======
+  $("#tasks").on("change", ".task-checkbox", function () {
+>>>>>>> refs/remotes/origin/main
     var taskId = $(this).closest('.task').data("id");
   
     var isCompleted = $(this).prop("checked");
